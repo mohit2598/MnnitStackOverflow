@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<% include partials/head.ejs %>
+    <title>
+      Index page
+    </title>
+  </head>
+  <body>
+<% include partials/navbar.ejs %>
+
+<div  class="container-fluid">
+	<div class="row" style="margin-top:0px;">
+
+		<div class="col-xl-7" style=" height:1000px; margin:50px 15px;">
+
+      <% include partials/posts.ejs %>
+
+		</div>
+
+		<div class="col-xl-4" style=" margin:50px 45px;">
+			<h1 style="font-weight:bold;"> Post Something!! </h1>
+			<p style=""> Just say hii. </p>
+
+				<div class="row">
+				      <div class="col-md-6">
+				            <div class="form-group">
+					                 <input type="text"  name="fname" class="form-control" id="fname" placeholder="First Name" required="required" />
+				            </div>
+				      </div>
+				      <div class="col-md-6">
+				            <div class="form-group">
+                          <input type="text" name="lname" id="lname" class="form-control" placeholder="Last Name"  />
+				            </div>
+				      </div>
+				</div>
+				<div class="row">
+				      <div class="col-md-12">
+				            <div class="form-group">
+					            <textarea class="form-control" name="message" id="message" placeholder="Type your post....." required rows="6"></textarea>
+				            </div>
+				      </div>
+        </div>
+        <input id="formbtn" type="submit" value="Post It" class="btn btn-primary" />
+
+
+		</div>
+	</div>
+</div>
+  </body>
+</html>
