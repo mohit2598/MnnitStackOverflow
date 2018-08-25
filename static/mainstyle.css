@@ -1,0 +1,134 @@
+.redAlert {
+	   box-shadow:0 0 0 0.2rem red;
+   }
+   .redAlert:focus {
+	   box-shadow:0 0 0 0.2rem red;
+   }
+   html body{
+	   background:url(back1.jpg) no-repeat center fixed;
+	   background-size:cover;
+   }
+  .row label {
+	   color:white;
+   }
+   .my-nav-bar {
+	   width:100%;
+	   padding:15px 15px;
+	   font-size:2rem;
+	   margin:0 0 10px 0;
+	   background-color:#343a40;
+   }
+   .my-nav-bar:hover {
+	   background-color:#343a40;
+   }
+   .my-nav-bar:hover .nav-link1 {
+	   color:#d9d9d9;
+   }
+   .my-nav-bar:hover .nav-link1:hover {
+	   text-decoration:none;
+	   color:#fff;
+   }
+   .float-left {
+	   float:left;
+   }
+   .float-right {
+	   float:right;
+   }
+   .nav1 {
+	   list-style-type:none;
+	   padding:0;
+	   margin:0;
+   }
+   .nav-item1 {
+	   display:inline;
+	   margin:0 10px;
+   }
+   .logo {
+   font-weight:bold;
+   
+   }
+   .nav-link1 {
+	   text-decoration:none;
+	   color:#ddd;
+   }
+   .nav-link1:hover {
+
+   }
+   .nav-link1:visited {
+	   text-decoration:none;
+   }
+   .container-fixed {
+	   height:89%;
+	   width:250px;
+	   position:fixed;
+	   right:0;
+	   top:80px;
+	   border:2px solid white;
+	   background-color:rgba(240,240,240,0.25);
+	   overflow:auto;
+   }
+   .chat-space {
+	   
+		position:fixed;
+		right:260px;
+		bottom:0;
+		height:450px;
+   }
+	.chat-window {
+		
+		float:right;
+		max-height:450px;
+		width:300px;
+		background-color:#fff;
+		margin-left:10px;
+	}
+	.chat-user-name a{
+		text-decoration:none;
+		font-size:2rem;
+		color:black;
+	}
+	.chat-user-name a:hover {
+		text-decoration:none;
+	}
+	.self {
+		padding:10px;
+		text-align:right;
+		margin:5px;
+	}
+	.self span {
+		border-radius:10px;
+		padding: 5px 10px;
+		background-color:rgba(0,0,255,.25);
+	}
+	.other span {
+		border-radius:10px;
+		padding:5px 10px;
+		background-color:rgba(255,0,0,.25);
+	}
+	.other {
+		padding:10px;
+		text-align:left;
+		margin:5px;
+	}
+	.typehint span{
+		text-align:left;
+		background-color:rgba(1,1,1,.02);
+		border-radius:10px;
+		padding:5px 10px;
+		display:none;
+		margin:5px;
+	}
+	.showistyping{
+		display:block;
+	}
+	.dem {
+		height:330px;
+		overflow:auto;
+	}
+	.inpmsgbox {
+		height:40px;
+		width:100%;
+	}
+	.lowermsgbox {
+		height:80px;
+	}

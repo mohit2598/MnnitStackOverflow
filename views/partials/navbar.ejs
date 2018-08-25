@@ -1,0 +1,58 @@
+<div class="my-nav-bar">
+<ul class="nav1">
+<li class="nav-item1">
+  <a class="nav-link1 logo" style="color:#eee;" href="#"> LOGO </a>
+</li>
+<li class="nav-item1">
+  <a class="nav-link1" href="/"> Home </a>
+</li>
+<li class="nav-item1">
+  <a class="nav-link1" href="/test"> About </a>
+</li>
+<li class="nav-item1">
+  <a class="nav-link1" href="#"> Contact Us </a>
+</li>
+<li class="nav-item1 float-right">
+  <a class="nav-link1" href="#" data-toggle="modal" data-target="#myModal">
+    <i class="fa fa-address-book"></i>
+    Login
+  </a>
+</li>
+</ul>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Log In Form</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <form method="post" action="/">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" name="username" placeholder="Username" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" name="password" class="form-control" placeholder="Password" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Log in" />
+  </form>
+  <a href="#home" > Forget Password </a>
+  <a href="/" > Create New Account </a>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+
+  </div>
+</div>
+</div>

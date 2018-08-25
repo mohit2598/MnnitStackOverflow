@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<% include partials/head.ejs %>
+    <title>
+      Index page
+    </title>
+  </head>
+  <body>
+<% include partials/navbar.ejs %>
+
+<div  class="container-fluid">
+	<div class="row" style="margin-top:70px;">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-4">
+			<h1 style="font-weight:bold; color:white;"> Create an account </h1>
+			<p style="color:white;"> Its free and always will be. </p>
+			<form method="post" name="form1" action="/test">
+
+				<div class="row">
+				<div class="col-md-6">
+				<div class="form-group">
+					<input type="text"  name="fname" class="form-control" id="fname" placeholder="First Name" required="required" />
+					<span id="errfn"></span>
+				</div>
+				</div>
+				<div class="col-md-6">
+				<div class="form-group">
+
+					<input type="text" name="lname" id="lname" class="form-control" placeholder="Last Name"  />
+					<span id="errln"></span>
+				</div>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-md-12">
+				<div class="form-group">
+
+					<input class="form-control" type="text" name="username" id="username" placeholder="Username" required="required" minlength="6"  />
+					<span id="errun"></span>
+				</div>
+				</div>
+				<div class="col-md-12">
+				<div class="form-group">
+
+					<input type="password" name="password" id="password" placeholder="Password" class="form-control" required="required" minlength="6" />
+				</div>
+				</div>
+				<div class="col-md-12">
+				<div class="form-group">
+
+					<input type="password" name="password2" id="password2" placeholder="Confirm Password" class="form-control" required="required" />
+					<span id="errpas"></span>
+				</div>
+				</div>
+				</div>
+
+				<input type="submit" value="Create Account" class="btn btn-primary" />
+			</form>
+			<p id="demo" > </p>
+		</div>
+	</div>
+</div>
+  </body>
+</html>
