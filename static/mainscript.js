@@ -1,7 +1,7 @@
 var socket = io.connect('http://192.168.31.109:9000');
 
 socket.on('newPost',function(data){
-		var update= "<li><h2>"+data.fn+" "+data.ln+"</h2><p>"+data.ms+"</p></li>"
+		var update= "<li><h2>"+data.fn+" "+data.ln+"</h2><p>"+data.ms+"</p></li>";
 		$("#pa").append(update);
 		$("#msgSound")[0].play();
 });
@@ -24,8 +24,6 @@ $(document).ready(function(){
 			data: data,
 		});
 		socket.emit('newPost',data);
-		fname.val("");
-		lname.val("");
 		msg.val("");
 	});
 	$("#openmsg").trigger("click");

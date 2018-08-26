@@ -53,8 +53,8 @@ module.exports = function(app){
     });
   });
 
-  app.get('/',function(req,res){
 
+  app.get('/',function(req,res){
       var sql = "SELECT * FROM data";
       con.query(sql,function(err,result,fields){
         if(err) throw err;
@@ -69,7 +69,7 @@ module.exports = function(app){
   app.post('/filemaintainer', function(req,res){
 
       var sql = "INSERT INTO data (fname, lname, content) VALUES (?,?,?)";
-      con.query(sql,[req.body.fn,req.body.ln,req.body.ms],function(err,result){
+      con.query(sql,[req.session.fname,req.session.lname,req.body.ms],function(err,result){
         if(err) throw err;
         console.log("data entered");
       });
@@ -102,21 +102,29 @@ module.exports = function(app){
   });
 
   app.get('/logout',function(req,res){
-    req.session.loggedIn=null;
+    req.session.destroy();
+
     res.redirect('..');
   });
 
 
   app.post('/login',function(req,res){
     if(!req.body) return res.sendStatus(400);
-    var usernameQuery = "SELECT password FROM userdata WHERE username= ?";
+    var usernameQuery = "SELECT * FROM userdata WHERE username= ?";
     con.query(usernameQuery,[req.body.username],function(err,result){
       if(err) throw err;
       if(result[0]) {
         if(result[0].password===req.body.password){
           console.log("Login Succesfull");
           loginErr=false;
-          req.session.loggedIn = true;
+          req.session.loggedIn = {
+            is:true,
+            fname:result[0].firstname,
+            lname:result[0].lastname
+          };
+          req.session.fname = result[0].firstname;
+          req.session.lname = result[0].lastname;
+          req.session.username = result[0].username;
         }
         else {
           console.log("Login Unsuccessfull");
