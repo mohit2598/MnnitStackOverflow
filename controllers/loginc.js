@@ -10,15 +10,45 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 //  });
 //});
 var fs = require('fs');
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host:'localhost',
+  user:'root',
+  password:'',
+  database: 'posts'
+});
+var flag=0;
+con.connect(function(err){
+  if(err){
+    flag=1;
+    throw err;
+  }
+  console.log("succesfull");
+});
+
+
+
+
 
 module.exports = function(app){
   app.get('/',function(req,res){
-    res.render('post_section.ejs');
+
+      var sql = "SELECT * FROM data";
+      con.query(sql,function(err,result,fields){
+        if(err) throw err;
+        res.render('post_section.ejs',{postcontent:result});
+      });
+
+
   });
 
   app.post('/filemaintainer', urlencodedParser, function(req,res){
-      fs.appendFile('posts.txt', JSON.stringify(req.body) , function(err){
+
+      var sql = "INSERT INTO data (fname, lname, content) VALUES ('"+req.body.fn+"','"+req.body.ln+ "','"+ req.body.ms+"')";
+      con.query(sql,function(err,result){
         if(err) throw err;
+        console.log("data entered");
       });
       console.log(req.body);
       res.send("ok");
@@ -28,8 +58,14 @@ module.exports = function(app){
     res.render('basic.ejs');
   });
 
-  app.post('/test', urlencodedParser ,function(req,res){
+  app.post('/newAcc', urlencodedParser ,function(req,res){
     if (!req.body)  return res.sendStatus(400);
-    res.render('basic2.ejs',{user:req.body});
+    res.redirect('..')
+    console.log("request :",req.body);
   });
+
+  app.get('/create',function(req,res){
+    res.render('basic.ejs');
+  })
+
 };

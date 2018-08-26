@@ -8,11 +8,14 @@
   </head>
   <body>
 <% include partials/navbar.ejs %>
+<audio id="msgSound">
+  <source src="/static/sound/new.mp3" type="audio/mpeg">
+  </audio>
 
 <div  class="container-fluid">
 	<div class="row" style="margin-top:0px;">
 
-		<div class="col-xl-7" style=" height:1000px; margin:50px 15px;">
+		<div class="col-xl-7" style="  margin:50px 15px;">
 
       <% include partials/posts.ejs %>
 

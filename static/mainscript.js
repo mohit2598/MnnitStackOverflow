@@ -1,3 +1,11 @@
+var socket = io.connect('http://192.168.31.109:9000');
+
+socket.on('newPost',function(data){
+		var update= "<li><h2>"+data.fn+" "+data.ln+"</h2><p>"+data.ms+"</p></li>"
+		$("#pa").append(update);
+		$("#msgSound")[0].play();
+});
+
 $(document).ready(function(){
 	$("#formbtn").click(function(){
 		var fname= $("#fname");
@@ -12,10 +20,8 @@ $(document).ready(function(){
 			type:'POST',
 			url:'/filemaintainer',
 			data: data,
-			success: function(result){
-				location.reload();
-			}
 		});
+		socket.emit('newPost',data);
 		fname.val("");
 		lname.val("");
 		msg.val("");

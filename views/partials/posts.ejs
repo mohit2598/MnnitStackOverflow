@@ -1,24 +1,15 @@
-<h3>
-  FirstName LastName
-</h3>
-<p>
-  here a msg will be displayed
-</p>
-<h3>
-  FirstName LastName
-</h3>
-<p>
-  here a msg will be displayed
-</p>
-<h3>
-  FirstName LastName
-</h3>
-<p>
-  here a msg will be displayed
-</p>
-<h3>
-  FirstName LastName
-</h3>
-<p>
-  here a msg will be displayed
-</p>
+<ol id="pa">
+
+<% postcontent.forEach(function(item){ %>
+  <li>
+    <h2>
+      <%= item.fname + " " + item.lname %>
+    </h2>
+    <p>
+      <%= item.content %>
+    </p>
+  </li>
+
+<% }); %>
+
+</ol>
