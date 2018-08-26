@@ -6,6 +6,8 @@ socket.on('newPost',function(data){
 		$("#msgSound")[0].play();
 });
 
+
+
 $(document).ready(function(){
 	$("#formbtn").click(function(){
 		var fname= $("#fname");
@@ -26,4 +28,5 @@ $(document).ready(function(){
 		lname.val("");
 		msg.val("");
 	});
+	$("#openmsg").trigger("click");
 });
