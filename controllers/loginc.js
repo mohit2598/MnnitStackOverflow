@@ -1,6 +1,6 @@
 var socket = require('socket.io');
 var bodyParser =require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+//var urlencodedParser = bodyParser.urlencoded({ extended: false });
 //const testFolder = 'E:\\project\\fresh\\n';
 //const fs = require('fs');
 //var filename = [];
@@ -12,6 +12,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 //});
 var fs = require('fs');
 var mysql = require('mysql');
+var expressValidator = require('express-validator');
+var expressSession = require('express-session');
 
 var con = mysql.createConnection({
   host:'localhost',
@@ -34,6 +36,10 @@ con.connect(function(err){
 
 module.exports = function(app){
 
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(expressValidator());
+  app.use(expressSession({secret:'dogra', saveUninitialized:false, resave:false}))
+
   var loginErr=false;    //to display login error
     var display=false;    //to display modal for errors
       var error = false;  //to display Account creation error
@@ -52,7 +58,7 @@ module.exports = function(app){
       var sql = "SELECT * FROM data";
       con.query(sql,function(err,result,fields){
         if(err) throw err;
-        res.render('post_section.ejs',{postcontent:result,loginErr:loginErr,display:display});
+        res.render('post_section.ejs',{postcontent:result,loginErr:loginErr,display:display,loggedIn:req.session.loggedIn});
         loginErr=false;
         display=false;
       });
@@ -60,7 +66,7 @@ module.exports = function(app){
 
   });
 
-  app.post('/filemaintainer', urlencodedParser, function(req,res){
+  app.post('/filemaintainer', function(req,res){
 
       var sql = "INSERT INTO data (fname, lname, content) VALUES (?,?,?)";
       con.query(sql,[req.body.fn,req.body.ln,req.body.ms],function(err,result){
@@ -77,7 +83,7 @@ module.exports = function(app){
 
 
 
-  app.post('/newAcc', urlencodedParser ,function(req,res){
+  app.post('/newAcc',function(req,res){
     if (!req.body)  return res.sendStatus(400);
 
     var sql= "INSERT INTO userdata (firstname,lastname,username,password) VALUES (?,?,?,?)";
@@ -90,12 +96,18 @@ module.exports = function(app){
   });
 
   app.get('/login',function(req,res){
-    res.render('loginPage',{loginErr:loginErr,display:display});
+    res.render('loginPage',{loginErr:loginErr,display:display,loggedIn:req.session.loggedIn});
     loginErr=false;
     display=false;
   });
 
-  app.post('/login',urlencodedParser,function(req,res){
+  app.get('/logout',function(req,res){
+    req.session.loggedIn=null;
+    res.redirect('..');
+  });
+
+
+  app.post('/login',function(req,res){
     if(!req.body) return res.sendStatus(400);
     var usernameQuery = "SELECT password FROM userdata WHERE username= ?";
     con.query(usernameQuery,[req.body.username],function(err,result){
@@ -104,6 +116,7 @@ module.exports = function(app){
         if(result[0].password===req.body.password){
           console.log("Login Succesfull");
           loginErr=false;
+          req.session.loggedIn = true;
         }
         else {
           console.log("Login Unsuccessfull");
@@ -122,7 +135,7 @@ module.exports = function(app){
   });
 
   app.get('/create',function(req,res){
-    res.render('basic.ejs',{err:error,loginErr:loginErr,display:display});
+    res.render('basic.ejs',{err:error,loginErr:loginErr,display:display,loggedIn:req.session.loggedIn});
     loginErr= false;
     error=false;
     display=false;

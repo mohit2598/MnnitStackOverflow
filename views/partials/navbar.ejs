@@ -9,15 +9,29 @@
 <li class="nav-item1">
   <a class="nav-link1" href="/"> About </a>
 </li>
+
+<% if(!loggedIn) { %>
 <li class="nav-item1">
   <a class="nav-link1" href="/create"> Create Account </a>
 </li>
+<% } %>
 <li class="nav-item1 float-right">
+
+  <% if(loggedIn) { %>
+    <a id="test" class="nav-link1" href="/logout"  >
+          <!-- class="nav-link1" href="#" data-toggle="modal" data-target="#myModal" -->
+      <i class="fa fa-address-book"></i>
+      Logout
+    </a>
+    <%  }
+    else { %>
+
   <a id="test" class="nav-link1" href="/login"  >
         <!-- class="nav-link1" href="#" data-toggle="modal" data-target="#myModal" -->
     <i class="fa fa-address-book"></i>
     Login
   </a>
+  <% } %>
 </li>
 </ul>
 </div>

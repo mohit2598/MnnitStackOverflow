@@ -8,6 +8,8 @@
   </head>
   <body>
 <% include partials/navbar.ejs %>
+
+
 <audio id="msgSound">
   <source src="/static/sound/new.mp3" type="audio/mpeg">
   </audio>
@@ -20,12 +22,12 @@
       <% include partials/posts.ejs %>
 
 		</div>
-
+<% if(loggedIn) { %>
 		<div class="col-xl-4" style=" margin:50px 45px;">
 			<h1 style="font-weight:bold;"> Post Something!! </h1>
 			<p style=""> Just say hii. </p>
 
-				<div class="row">
+<!--				<div class="row">
 				      <div class="col-md-6">
 				            <div class="form-group">
 					                 <input type="text"  name="fname" class="form-control" id="fname" placeholder="First Name" required="required" />
@@ -37,6 +39,7 @@
 				            </div>
 				      </div>
 				</div>
+      -->
 				<div class="row">
 				      <div class="col-md-12">
 				            <div class="form-group">
@@ -48,6 +51,8 @@
 
 
 		</div>
+
+    <% } %>
 	</div>
 </div>
   </body>
