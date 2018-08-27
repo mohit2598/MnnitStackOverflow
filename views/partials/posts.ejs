@@ -2,13 +2,16 @@
 
 <% postcontent.forEach(function(item){ %>
   <li>
-    <h2>
+    <h2 class="question-heading"><a href="question/<%= item.id %>" style="text-decoration:none;">
       <strong>Question:</strong>
       <%= item.content  %>
+    </a>
     </h2>
     <p>
       <strong>By:</strong>
+      <a class="author" href="profile/<%= item.username %>" style="text-decoration:none;">
       <%= item.username %>
+    </a>
     </p>
   </li>
 

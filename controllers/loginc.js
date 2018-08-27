@@ -165,4 +165,14 @@ module.exports = function(app){
     });
   });
 
+  app.get('/profile/:username',function(req,res){
+    console.log(req.params.username);
+    res.end(req.params.username);
+  });
+
+  app.get('/question/:id',function(req,res){
+    console.log(req.params.id);
+    res.end(req.params.id);
+  });
+
 };

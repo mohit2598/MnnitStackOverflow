@@ -1,7 +1,7 @@
 var socket = io.connect('http://192.168.31.109:9000');
 	var uErr=false ,pErr=false;
 socket.on('newPost',function(data){
-		var update= "<li><h2><strong>Question:</strong>"+data.ms+"</h2><p><strong>By:</strong>"+data.un+"</p></li>";
+		var update= "<li><h2><strong>Question: </strong>"+data.ms+"</h2><p><strong>By: </strong>"+data.un+"</p></li>";
 		$("#pa").append(update);
 		$("#msgSound")[0].play();
 });

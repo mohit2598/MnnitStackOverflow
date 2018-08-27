@@ -1,4 +1,27 @@
-.redAlert {
+		.question-heading a{
+			text-decoration: none;
+			color:black;
+		}
+			.question-heading a:hover{
+				text-decoration: none;
+				color:grey;
+			}
+			.question-heading a:visited{
+				text-decoration: none;
+			}
+			.author a{
+				text-decoration: none;
+				color:black;
+			}
+				.author a:hover{
+					text-decoration: none;
+					color:grey;
+				}
+				.author a:visited{
+					text-decoration: none;
+				}
+
+		.redAlert {
 	   box-shadow:0 0 0 0.2rem red;
    }
    .redAlert:focus {
@@ -45,7 +68,7 @@
    }
    .logo {
    font-weight:bold;
-   
+
    }
    .nav-link1 {
 	   text-decoration:none;
@@ -68,14 +91,14 @@
 	   overflow:auto;
    }
    .chat-space {
-	   
+
 		position:fixed;
 		right:260px;
 		bottom:0;
 		height:450px;
    }
 	.chat-window {
-		
+
 		float:right;
 		max-height:450px;
 		width:300px;
