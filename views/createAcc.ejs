@@ -7,7 +7,7 @@
 		<div class="col-md-4">
 			<h1 style="font-weight:bold;"> Create an account </h1>
 			<p > Its free and always will be. </p>
-			<form method="post" name="createAccountForm" action="/newAcc">
+			<form method="post" name="createAccountForm" action="/newAcc" onsubmit="return validation()">
 				<div class="row">
 				<div class="col-md-6">
 				<div class="form-group">
@@ -28,7 +28,7 @@
 				<div class="form-group">
 
 					<input class="form-control" type="text" name="username" id="username" placeholder="Username" required minlength="6"  />
-
+            <span id="unError" style="display:none;"> Already Taken </span>
 				</div>
 				</div>
 				<div class="col-md-12">
@@ -41,12 +41,12 @@
 				<div class="form-group">
 
 					<input type="password" name="password2" id="password2" placeholder="Confirm Password" class="form-control" required />
-
+          <span id="cpError" style="display:none;"> Password Does not match </span>
 				</div>
 				</div>
 				</div>
 
-				<input type="submit" value="Create Account" class="btn btn-primary" />
+				<input type="submit" value="Create Account" id="signUpBtn" class="btn btn-primary" />
 			</form>
 
 		</div>

@@ -3,10 +3,12 @@
 <% postcontent.forEach(function(item){ %>
   <li>
     <h2>
-      <%= item.fname + " " + item.lname %>
+      <strong>Question:</strong>
+      <%= item.content  %>
     </h2>
     <p>
-      <%= item.content %>
+      <strong>By:</strong>
+      <%= item.username %>
     </p>
   </li>
 

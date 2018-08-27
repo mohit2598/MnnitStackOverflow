@@ -49,6 +49,7 @@ module.exports = function(app){
   io.on('connection',function(socket){
     console.log('User connected with ID:' + socket.id);
     socket.on('newPost',function(data){
+      console.log("New post recieved");
       io.sockets.emit('newPost',data);
     });
   });
@@ -68,8 +69,8 @@ module.exports = function(app){
 
   app.post('/filemaintainer', function(req,res){
 
-      var sql = "INSERT INTO data (fname, lname, content) VALUES (?,?,?)";
-      con.query(sql,[req.session.fname,req.session.lname,req.body.ms],function(err,result){
+      var sql = "INSERT INTO data (fname, lname, username, content) VALUES (?,?,?,?)";
+      con.query(sql,[req.session.fname,req.session.lname,req.session.username,req.body.ms],function(err,result){
         if(err) throw err;
         console.log("data entered");
       });
@@ -120,7 +121,8 @@ module.exports = function(app){
           req.session.loggedIn = {
             is:true,
             fname:result[0].firstname,
-            lname:result[0].lastname
+            lname:result[0].lastname,
+            uname:result[0].username
           };
           req.session.fname = result[0].firstname;
           req.session.lname = result[0].lastname;
@@ -147,6 +149,20 @@ module.exports = function(app){
     loginErr= false;
     error=false;
     display=false;
+  });
+
+  app.post('/checkUsername',function(req,res){
+    console.log(req.body);
+    var sql = "SELECT username FROM userdata WHERE username=?";
+    con.query(sql,[req.body.username],function(err,result){
+      if(err) throw err;
+      if(result[0]){
+        res.send("taken");
+      }
+      else {
+        res.send("available");
+      }
+    });
   });
 
 };
