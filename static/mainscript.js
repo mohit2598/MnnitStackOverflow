@@ -6,6 +6,9 @@ socket.on('newPost',function(data){
 		$("#msgSound")[0].play();
 });
 
+socket.on('newAnswer',function(data){
+	location.reload();
+});
 
 
 $(document).ready(function(){
@@ -22,6 +25,17 @@ $(document).ready(function(){
 		};
 		socket.emit('newPost',data);
 		$("#message").val("");
+	});
+
+	$("#submitAnswer").click(function(){
+		var info =$("#info").val();
+		var ans = $("#answer").val();
+		var data = {
+			info:info,
+			ans: ans,
+		};
+		socket.emit('newAnswer',data);
+		$("#answer").val("");
 	});
 
 	$("#openmsg").trigger("click");

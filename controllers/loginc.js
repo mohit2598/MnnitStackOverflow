@@ -35,6 +35,7 @@ module.exports = function(app){
 
   io.on('connection',function(socket){
     console.log('User connected with ID:' + socket.id);
+
     socket.on('newPost',function(data){
       var sql = "INSERT INTO data (fname, lname, username, content) VALUES (?,?,?,?)";
       con.query(sql,[data.fn,data.ln,data.un,data.ms],function(err,result){
@@ -45,7 +46,7 @@ module.exports = function(app){
           if(err) throw err;
           data.id=result[0].id;
           console.log("id found:"+data.id);
-          var createQtable = "CREATE TABLE qid"+data.id+" (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(100) NOT NULL, answer TEXT NOT NULL, time DATETIME NOT NULL)";
+          var createQtable = "CREATE TABLE qid"+data.id+" (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(100) NOT NULL, answer TEXT NOT NULL, time DATETIME DEFAULT CURRENT_TIMESTAMP)";
           con.query(createQtable,function(err,result){
             if(err) throw err;
             console.log("separate table for question created");
@@ -54,6 +55,18 @@ module.exports = function(app){
         });
         console.log("New post recieved");
       });
+    });
+
+    socket.on('newAnswer',function(data){
+      console.log(data);
+      var info = JSON.parse(data.info);
+      var sql = "INSERT into qid"+info.qid+" (username,answer) VALUES (?,?)";
+      con.query(sql,[info.uname,data.ans],function(err,result){
+        if(err) throw err;
+        console.log("answer inserted");
+        io.sockets.emit('newAnswer',true);
+      });
+
     });
   });
 
@@ -97,8 +110,8 @@ module.exports = function(app){
       if(err) throw err;
       if(result[0]) {
         if(result[0].password===req.body.password){
-          console.log("Login Succesfull");
-          loginErr="Login Succesfull";
+          console.log("Login Successfull");
+          loginErr="Login Successfull";
           req.session.loggedIn = {
             is:true,
             fname:result[0].firstname,
@@ -154,27 +167,23 @@ module.exports = function(app){
     console.log(req.params.id);
     var sql = "SELECT * FROM qid"+req.params.id;
     var sql2 = "SELECT * FROM data WHERE id=?";
-    con.query(sql,function(err,results){
-      if(err) throw err;
-      console.log(results);
-      if(results[0]){
-        con.query(sql2,[req.params.id],function(err,result){
-          if(err) throw err;
-          res.render('question.ejs',{qtable:results,ques:result,loggedIn:req.session.loggedIn,loginErr:loginErr,display:display,answered:true});
-          loginErr=null;
-          display=false;
-        });
-      }
-        else{
           con.query(sql2,[req.params.id],function(err,result){
             if(err) throw err;
-            res.render('question.ejs',{qtable:null,ques:result[0],loggedIn:req.session.loggedIn,loginErr:loginErr,display:display,answered:false});
-            loginErr=null;
-            display=false;
+            con.query(sql,function(err,results){
+              if(err) throw err;
+              if(results[0]){
+                res.render('question.ejs',{qtable:results,ques:result[0],loggedIn:req.session.loggedIn,loginErr:loginErr,display:display,answered:true});
+                loginErr=null;
+                display=false;
+              }
+              else{
+                res.render('question.ejs',{qtable:null,ques:result[0],loggedIn:req.session.loggedIn,loginErr:loginErr,display:display,answered:false});
+                loginErr=null;
+                display=false;
+              }
+            });
           });
-        }
 
     });
-  });
 
 };
