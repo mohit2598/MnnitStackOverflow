@@ -18,16 +18,18 @@
 <li class="nav-item1 float-right">
 
   <% if(loggedIn) { %>
-    <a id="test" class="nav-link1" href="/logout"  >
-          <!-- class="nav-link1" href="#" data-toggle="modal" data-target="#myModal" -->
+    <a class="nav-link1" href="/logout">
       <i class="fa fa-address-book"></i>
       Logout
     </a>
+  </li>
+  <li class="nav-item1 float-right">
+    <a class="nav-link1" href="/profile/<%= loggedIn.uname %>" > Profile </a>
+
     <%  }
     else { %>
 
   <a id="test" class="nav-link1" href="/login"  >
-        <!-- class="nav-link1" href="#" data-toggle="modal" data-target="#myModal" -->
     <i class="fa fa-address-book"></i>
     Login
   </a>
@@ -35,48 +37,7 @@
 </li>
 </ul>
 </div>
-<!-- The Modal
-<div class="modal" id="myModal">
-<div class="modal-dialog">
-  <div class="modal-content">
-
-
-    <div class="modal-header">
-      <h4 class="modal-title">Log In Form</h4>
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-    </div>
-
-
-    <div class="modal-body">
-
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="loginUserName" placeholder="Username" class="form-control" required/>
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="loginPassword" class="form-control" placeholder="Password" required/>
-    </div>
-    <input id="submitlogin" type="submit" class="btn btn-primary" value="Log in" />
-
-  <a href="#home" > Forget Password </a>
-  <a href="/create" style="margin-left:12px;"> Create New Account </a>
-    </div>
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-    </div>
-
-  </div>
-</div>
-</div>
-
--->
-
-
-<!-- Error And Login successfull Modal -->
-
+  <% if(loginErr!=null) { %>
   <button class="nav-link1" href="#" data-toggle="modal" data-target="<% if(display==true){ %> #myInfoModal <% } %>" id="openmsg" style="display:none;"></button>
 
 <!-- The Modal -->
@@ -87,13 +48,9 @@
     <!-- Modal Header -->
     <div class="modal-header">
       <h4 class="modal-title">
-        <% if(loginErr) { %>
-          Error
-      <%  }
-          else { %>
-            Success
+      
+        <%=  loginErr %>
 
-        <%  } %>
 
       </h4>
       <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -101,14 +58,12 @@
 
     <!-- Modal body -->
     <div class="modal-body">
-      <% if(loginErr) { %>
-        Wrong Username or Password
-    <%  }
-        else { %>
-          Login Succesfull
-          <%  } %>
+
+      <%=  loginErr %>
+
     </div>
 
   </div>
 </div>
 </div>
+<%  } %>

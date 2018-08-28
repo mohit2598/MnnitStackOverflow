@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partials/head.ejs %>
+    <title>
+      Question Page
+    </title>
+  </head>
+  <body>
+<% include partials/navbar.ejs %>
+<div  class="container-fluid">
+	<div class="row" style="margin-top:0px;">
+    <div class="col-xl-1"></div>
+		<div class="col-xl-6" style="margin:50px 15px;">
+      <h3><strong>Question: </strong>
+        <%= ques.content %>
+      </h3>
+      <p><strong>Asked by: </strong>
+        <a href="/profile/<%= ques.username %>">
+        <%= ques.username %>
+      </a>
+          <strong> At: </strong>
+          <%= ques.timestamp %>
+        </p>
+        <% if(answered==true){ %>
+      <% qtable.forEach(function(answer){ %>
+        <h2><strong>Answer: </strong>
+          <%= answer.answer %>
+        </h2>
+        <p><strong>Answered By: </strong>
+          <a href="/profile/<%= answer.username %>">
+        <%= answer.username %>
+      </a>
+        <strong> At: </strong>
+        <%= answer.time %>
+      </p>
+    <%  }); }
+      else{ %>
+        <p>
+          No answers... Be the first one to answer..
+        </p>
+      <% if(!loggedIn){ %>
+        <p>
+        <a href="/create"> Sign Up </a>
+        Or
+        <a href="/login"> Login </a>
+        to answer....
+      </p>
+
+    <%  } } %>
+
+
+
+		</div>
+<% if(loggedIn) { %>
+		<div class="col-xl-4" style=" margin:50px 45px;">
+			<h1 style="font-weight:bold;"> Answer the Question!! </h1>
+			<p style=""> Explain your best... </p>
+					                 <input type="text" name="fname" id="fname" value="<%= loggedIn.fname %>"  style="display:none;"/>
+                          <input type="text" name="lname" id="lname" value="<%= loggedIn.lname %>" style="display:none;"/>
+                          <input type="text" name="lname" id="uname" value="<%= loggedIn.uname %>" style="display:none;"/>
+				<div class="row">
+				      <div class="col-md-12">
+				            <div class="form-group">
+					            <textarea class="form-control" name="answer" id="answer" placeholder="Write here....." required rows="6"></textarea>
+				            </div>
+				      </div>
+        </div>
+        <input id="submitAnswer" type="submit" value="Answer It" class="btn btn-primary" />
+		</div>
+    <% } %>
+	</div>
+</div>
+  </body>
+</html>

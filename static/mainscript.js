@@ -1,7 +1,7 @@
 var socket = io.connect('http://192.168.31.109:9000');
 	var uErr=false ,pErr=false;
 socket.on('newPost',function(data){
-		var update= "<li><h2><strong>Question: </strong>"+data.ms+"</h2><p><strong>By: </strong>"+data.un+"</p></li>";
+		var update= "<li><h2 class='question-heading'><a href='question/"+data.id+"'><strong>Question: </strong>"+data.ms+"</a></h2><p><strong>By: </strong><a class='author' href='profile/"+data.un+"' >"+data.un+"</a></p></li>";
 		$("#pa").append(update);
 		$("#msgSound")[0].play();
 });
@@ -20,11 +20,6 @@ $(document).ready(function(){
 			un: un ,
 			ms: ms,
 		};
-		$.ajax({
-			type:'POST',
-			url:'/filemaintainer',
-			data: data,
-		});
 		socket.emit('newPost',data);
 		$("#message").val("");
 	});

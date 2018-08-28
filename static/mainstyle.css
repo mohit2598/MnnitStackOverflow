@@ -1,3 +1,13 @@
+
+.modal-dialog {
+margin:auto;
+width:50%;
+z-index: 10040;
+padding-top:40vh;
+overflow: auto;
+overflow-y: auto;
+}
+
 		.question-heading a{
 			text-decoration: none;
 			color:black;
