@@ -1,9 +1,8 @@
 var socket = io.connect('http://192.168.31.109:9000');
-	var uErr=false ,pErr=false;
-socket.on('newPost',function(data){
-		var update= "<li><h2 class='question-heading'><a href='question/"+data.id+"'><strong>Question: </strong>"+data.ms+"</a></h2><p><strong>By: </strong><a class='author' href='profile/"+data.un+"' >"+data.un+"</a></p></li>";
-		$("#pa").append(update);
+	var uErr=false ,pErr=false,emailErr=false;
+socket.on('newQuestion',function(data){
 		$("#msgSound")[0].play();
+		location.reload();
 });
 
 socket.on('newAnswer',function(data){
@@ -12,19 +11,31 @@ socket.on('newAnswer',function(data){
 
 
 $(document).ready(function(){
+	$(".upvote").click(function(event){
+		$(this).attr("disabled", true);
+		$(this).addClass("btn-success");
+		var UpvoteForAid = $(this).attr("id");
+		var update= "voteCount"+UpvoteForAid;
+		var uname = $("#info").val();
+		$.post("/updateVote", {aid: UpvoteForAid, uname:uname}, function(result){
+			if(result=="success"){
+
+				$("#"+update).text(function(i, origText){
+					return (origText*1)+1;
+				});
+			}
+		});
+	});
+
 	$("#formbtn").click(function(){
-		var fn =$("#fname").val();
-		var ln = $("#lname").val();
-		var un = $("#uname").val();
-		var ms = $("#message").val();
+		var info =$("#info").val();
+		var ques = $("#question").val();
 		var data = {
-			fn: fn ,
-			ln: ln ,
-			un: un ,
-			ms: ms,
+			info:info,
+			ques: ques,
 		};
-		socket.emit('newPost',data);
-		$("#message").val("");
+		socket.emit('newQuestion',data);
+		$("#question").val("");
 	});
 
 	$("#submitAnswer").click(function(){
@@ -56,6 +67,21 @@ $(document).ready(function(){
 			},"text");
 	});
 
+	$("#email").keyup(function(){
+		var email = $("#email").val();
+		var f_at_rate = /@/.test(email);
+		var dot = /./.test(email);
+		if(f_at_rate && dot) {
+			emailErr=false;
+			$("#email").removeClass("redAlert");
+			$("#eError").css("display","none");
+		}
+		else{
+		 	emailErr=true;
+			$("#email").addClass("redAlert");
+			$("#eError").css("display","inline");
+		}
+	});
 
 });
 
@@ -71,5 +97,6 @@ function validation(){
 			$("#cpError").css("display","inline");
 			 pErr=true;
 		 }
-	if(uErr || pErr) return false;
+
+	if(uErr || pErr || emailErr) return false;
 };

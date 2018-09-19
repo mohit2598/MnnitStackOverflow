@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partials/head.ejs %>
+    <title>
+      Question Page
+    </title>
+  </head>
+  <body>
+<% include partials/navbar.ejs %>
+<div class="container">
+  <div>
+    <h4> Name: </h4>
+    <h5> <%= user.fullname %> </h5>
+    <h4> Handle: </h4>
+    <h5> <%= user.username %> </h5>
+    <h4> Email: </h4>
+    <h5> <%= user.email %> </h5>
+  </div>
+  <div>
+    <h4> Stats: </h4>
+    <p>
+    <strong> Questions asked: </strong><span> <%= user.curiosity %> </span></br>
+    <strong> Answers given: </strong> <span> <%= user.stars %> </span></br>
+    <strong> Respect Points: </strong> <span> <%= user.respect %> </span> </p>
+  </div>
+  <div>
+    <h4> Questions asked: </h4>
+     <% questions.forEach(function(question){ %>
+       <h5 class="question-heading"><a href="/question/<%= question.id %>">
+         <strong>Question:</strong>
+         <%= question.content  %>
+       </a>
+     </h5>
+     <% }) %>
+
+</body>
+</html>

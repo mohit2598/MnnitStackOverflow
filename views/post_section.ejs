@@ -26,17 +26,11 @@
 		<div class="col-xl-4" style=" margin:50px 45px;">
 			<h1 style="font-weight:bold;"> Ask Something!! </h1>
 			<p style=""> Or just anything!! </p>
-					                 <input type="text" name="fname" id="fname" value="<%= loggedIn.fname %>"  style="display:none;"/>
-                          <input type="text" name="lname" id="lname" value="<%= loggedIn.lname %>" style="display:none;"/>
-                          <input type="text" name="lname" id="uname" value="<%= loggedIn.uname %>" style="display:none;"/>
-				<div class="row">
-				      <div class="col-md-12">
+      <input type="hidden" name="info" id="info" value='{"fullname":"<%= loggedIn.fullname %>","author":"<%= loggedIn.uname %>"}'  style="display:none;"/>
 				            <div class="form-group">
-					            <textarea class="form-control" name="message" id="message" placeholder="Write here....." required rows="6"></textarea>
+					            <textarea class="form-control" name="question" id="question" placeholder="Write here....." required rows="6"></textarea>
 				            </div>
-				      </div>
-        </div>
-        <input id="formbtn" type="submit" value="Post It" class="btn btn-primary" />
+        <input id="formbtn" type="submit" value="Ask It" class="btn btn-primary" />
 		</div>
     <% } %>
 	</div>

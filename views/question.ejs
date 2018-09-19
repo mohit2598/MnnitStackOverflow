@@ -10,30 +10,43 @@
 <% include partials/navbar.ejs %>
 <div  class="container-fluid">
 	<div class="row" style="margin-top:0px;">
-    <div class="col-xl-1"></div>
-		<div class="col-xl-6" style="margin:50px 15px;">
+    <div class="col-xl-1" >
+
+    </div>
+		<div class="col-xl-6" style="margin:50px 15px;border:2px solid white">
+
+      <div style="margin-left:45px;">
       <h3><strong>Question: </strong>
         <%= ques.content %>
       </h3>
       <p><strong>Asked by: </strong>
-        <a href="/profile/<%= ques.username %>">
-        <%= ques.username %>
+        <a href="/profile/<%= ques.author %>">
+        <%= ques.author %>
       </a>
           <strong> At: </strong>
           <%= ques.timestamp %>
         </p>
-        <% if(answered==true){ %>
-      <% qtable.forEach(function(answer){ %>
-        <h2><strong>Answer: </strong>
+      </div>
+      <div style="clear:both;"></div>
+        <% if(ques.answered==1){ %>
+      <% answers.forEach(function(answer){ %>
+        <div style="width:40px; border:2px solid white; float:left;" >
+         <button <% if(!loggedIn) { %> disabled title="Login to upvote.."<% } %> href="JavaScript:void(0)" class="upvote btn" id="<%=answer.aid%>"><i class="fa fa-caret-up" style="font-size:20px"></i></button></br> 
+        <div id="voteCount<%=answer.aid%>" style="text-align:center; font-weight:bold; font-size:20px;"><%= answer.upvotes %></div>
+        </div>
+        <div style="margin-left:55px;">
+        <h3><strong>Answer: </strong>
           <%= answer.answer %>
-        </h2>
+        </h3>
         <p><strong>Answered By: </strong>
-          <a href="/profile/<%= answer.username %>">
-        <%= answer.username %>
+          <a href="/profile/<%= answer.author %>">
+        <%= answer.author %>
       </a>
         <strong> At: </strong>
         <%= answer.time %>
       </p>
+    </div>
+    <div style="clear:both;"></div>
     <%  }); }
       else{ %>
         <p>
@@ -52,24 +65,21 @@
 
 
 		</div>
+    <div class="col-xl-4" style=" margin:50px 45px;">
 <% if(loggedIn) { %>
-		<div class="col-xl-4" style=" margin:50px 45px;">
+
 			<h1 style="font-weight:bold;"> Answer the Question!! </h1>
 			<p style=""> Explain your best... </p>
-					                 <input type="hidden" name="info" id="info" value='{"fname":"<%= loggedIn.fname %>","lname":"<%= loggedIn.lname %>","uname":"<%= loggedIn.uname %>","qid":"<%= ques.id %>"}'  style="display:none;"/>
-                          <input type="hidden" name="lname" id="lname" value="" style="display:none;"/>
-                          <input type="hidden" name="uname" id="uname" value="" style="display:none;"/>
-
-				<div class="row">
-				      <div class="col-md-12">
+				<input type="hidden" name="info" id="info" value='{"fullname":"<%= loggedIn.fullname %>","author":"<%= loggedIn.uname %>","qid":"<%= ques.id %>"}'  style="display:none;"/>
 				            <div class="form-group">
 					            <textarea class="form-control" name="answer" id="answer" placeholder="Write here....." required rows="6"></textarea>
 				            </div>
-				      </div>
-        </div>
         <input id="submitAnswer" type="submit" value="Answer It" class="btn btn-primary" />
-		</div>
+
     <% } %>
+    </div>
+    <div class="col-xl-1">
+    </div>
 	</div>
 </div>
   </body>
