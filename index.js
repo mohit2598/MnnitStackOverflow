@@ -9,3 +9,4 @@ loginc(app);
 
 app.set('view engine', 'ejs');
 app.use('/static',express.static('static'));
+//sjkndasjndjkasjksa jk sajkcnsjkck
